@@ -28,7 +28,20 @@ router.get("/:id", (request, response) => {
 
 //Post
 
+router.post("/", (request, response) => {
+    db("accounts").insert(request.body, "id")
+        .then(ids => {
+            response.status(201).json({data: ids});
+        })
+        .catch(error => {
+            console.log(error);
+            response.status(500).json({error: error.message});
+        })
+})
+
 //Put
+
+
 
 //Delete
 
