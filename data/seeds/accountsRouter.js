@@ -54,4 +54,14 @@ router.put("/:id", (request, response) => {
 
 //Delete
 
+router.delete("/:id", (request, response) => {
+    db("accounts").where({id: request.params.id}).del()
+        .then(count => {
+            response.status(200).json({ data: count })
+        })
+        .catch(error => {
+            response.status(500).json({ error: error.message })
+        })
+})
+
 module.exports = router;
