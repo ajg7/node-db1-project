@@ -41,7 +41,16 @@ router.post("/", (request, response) => {
 
 //Put
 
-
+router.put("/:id", (request, response) => {
+    const changes = request.body;
+    db("accounts").where({id: request.params.id}).update(changes)
+        .then(count => {
+            response.status(200).json({ data: count })
+        })
+        .catch(error => {
+            response.status(500).json({ error: error.message })
+        })
+})
 
 //Delete
 
